@@ -11,7 +11,7 @@ class Identifier{
 
     public function formatted_phone_number($num)
     {
-        $num = str_replace(array(" ", ",", ".", "!", "-", "@", "#", "$", "%", "^", "&", "*", "(", ")"), "", $num);
+        $num = str_replace(array(" ", ",", ".", "!", "-", "@", "#", "$", "%", "^", "&", "*", "(", ")", "_"), "", $num);
         if (strlen($num) <= 12) {
             $c = substr($num, 0, 1);
             if (substr($num, 0, 3) == '254' and strlen($num) == 12) {
