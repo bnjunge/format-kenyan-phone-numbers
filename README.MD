@@ -5,7 +5,6 @@ This is a simple php class that formats Kenyan phone Numbers and identifies whic
 Instantiate the class or extend on your methods
 #### Instantiating
  ```<?php
- <?php
         $newClass = new Identifier;
 
         // your logic
@@ -17,12 +16,9 @@ Instantiate the class or extend on your methods
         # Check ISP
         $isp = $newClass->check_operator($formatted_number);
         echo $isp;
-?>
 ```
 #### Extending
 ```<?php
-
-<?php
  class YourClassName extends Identifier{
      // your logic
 
@@ -37,7 +33,6 @@ Instantiate the class or extend on your methods
         echo $isp;
      }
  }
-?>
 
 ```
 #### Format Phone Numbers
