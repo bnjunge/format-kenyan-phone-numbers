@@ -35,10 +35,11 @@ class Identifier{
 
     private function identifiers_imsi()
     {
-        $countryCarriers = array(
+        $countryCareers = array(
             'kenya' => array(
                 'carriers' => array(
                     'Safaricom' => array(
+                        '254101',
                         '254111',
                         '254700',
                         '254701',
@@ -74,7 +75,6 @@ class Identifier{
                         '254791',
                         '254792',
                         '254793',
-                        '254795',
                         '254797',
                         '254798',
                         '254799',
@@ -87,7 +87,6 @@ class Identifier{
                         '254748',
                         '254757',
                         '254759',
-                        '254768',
                         '254769'
                     ),
                     'Airtel' => array(
@@ -115,7 +114,7 @@ class Identifier{
                         '254788',
                         '254789'
                     ),
-                    'Orange' => array(
+                    'Telkom' => array(
                         '254770',
                         '254771',
                         '254772',
@@ -136,7 +135,7 @@ class Identifier{
             )
 
         );
-        return $countryCarriers;
+        return $countryCareers;
     }
 
     /**
@@ -156,7 +155,7 @@ class Identifier{
         // Providers
         $Safaricom = $cc->kenya->carriers->Safaricom;
         $Airtel = $cc->kenya->carriers->Airtel;
-        $Orange = $cc->kenya->carriers->Orange;
+        $Telkom = $cc->kenya->carriers->Telkom;
         $Equitel = $cc->kenya->carriers->Equitel;
         $Faiba4G = $cc->kenya->carriers->Faiba4G;
 
@@ -165,8 +164,8 @@ class Identifier{
             return 'safaricom';
         } elseif (in_array($prefix, $Airtel)) {
             return 'airtel';
-        } elseif (in_array($prefix, $Orange)) {
-            return 'orange';
+        } elseif (in_array($prefix, $Telkom)) {
+            return 'telkom';
         } elseif (in_array($prefix, $Equitel)) {
             return 'equitel';
         } elseif (in_array($prefix, $Faiba4G)) {
