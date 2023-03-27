@@ -1,4 +1,6 @@
 <?php
+namespace App\Bl\General;
+
 class Identifier{
 /**
      *
@@ -9,9 +11,10 @@ class Identifier{
      * @access public
      */
 
+
     public function formatted_phone_number($num)
     {
-        $num = str_replace(array(" ", ",", ".", "!", "-", "@", "#", "$", "%", "^", "&", "*", "(", ")", "_"), "", $num);
+       $num = str_replace(array(" ", ",", ".", "!", "+", "-", "@", "#", "$", "%", "^", "&", "*", "(", ")", "_"), "", $num);
         if (strlen($num) <= 12) {
             $c = substr($num, 0, 1);
             if (substr($num, 0, 3) == '254' and strlen($num) == 12) {
@@ -39,8 +42,12 @@ class Identifier{
             'kenya' => array(
                 'carriers' => array(
                     'Safaricom' => array(
-                        '254101',
+                        '254110',
                         '254111',
+                        '254112',
+                        '254113',
+                        '254114',
+                        '254115',
                         '254700',
                         '254701',
                         '254702',
@@ -91,6 +98,12 @@ class Identifier{
                         '254769'
                     ),
                     'Airtel' => array(
+                        '254100',
+                        '254101',
+                        '254102',
+                        '254103',
+                        '254104',
+                        '254105',
                         '254731',
                         '254732',
                         '254733',
@@ -107,8 +120,12 @@ class Identifier{
                         '254754',
                         '254755',
                         '254756',
+                        '254762',
                         '254780',
                         '254781',
+                        '254782',
+                        '254783',
+                        '254784',
                         '254785',
                         '254786',
                         '254787',
@@ -123,14 +140,27 @@ class Identifier{
                         '254774',
                         '254775',
                         '254776',
+                        '254777',
+                        '254778',
+                        '254779',
                     ),
                     'Equitel' => array(
                         '254763',
                         '254764',
-                        '254765'
+                        '254765',
+                        '254766'
                     ),
                     'Faiba4G' => array(
                         '254747'
+                    ),
+                    'Eferio' => array(
+                        '254761'
+                    ),
+                    'Sema_Mobile' => array(
+                        '254767'
+                    ),
+                    'Homelands media' => array(
+                        '254744'
                     )
                 )
             )
@@ -159,20 +189,40 @@ class Identifier{
         $Telkom = $cc->kenya->carriers->Telkom;
         $Equitel = $cc->kenya->carriers->Equitel;
         $Faiba4G = $cc->kenya->carriers->Faiba4G;
+        $Eferio = $cc->kenya->carriers->Eferio;
+        $Sema_Mobile = $cc->kenya->carriers->Sema_Mobile;
+        $Homelands_media = $cc->kenya->carriers->Homelands_media;
 
-        // check if number is safaricom
-        if (in_array($prefix, $Safaricom)) {
-            return 'safaricom';
-        } elseif (in_array($prefix, $Airtel)) {
-            return 'airtel';
-        } elseif (in_array($prefix, $Telkom)) {
-            return 'telkom';
-        } elseif (in_array($prefix, $Equitel)) {
-            return 'equitel';
-        } elseif (in_array($prefix, $Faiba4G)) {
-            return 'faiba4g';
-        } else {
-            return 'Invalid Operator';
-        }
+        $operators = [
+            'safaricom' => $Safaricom,
+            'airtel' => $Airtel,
+            'telkom' => $Telkom,
+            'equitel' => $Equitel,
+            'faiba4g' => $Faiba4G,
+            'Eferio' => $Eferio,
+            'Sema_Mobile' => $Sema_Mobile,
+            'Homelands_media' => $Homelands_media,
+          ];
+
+          /**
+           * could possibly use an array intersect instead of a foreach loop but not tested
+           * 
+           * 
+           * $result = array_intersect($operators, [$prefix]);
+           * 
+           * if (!empty($result)) {
+           * return key($result);
+           * }
+          */
+
+          
+          foreach ($operators as $key => $value) {
+            if (in_array($prefix, $value)) {
+              return $key;
+            }
+          }
+          
+          return 'Invalid Operator';
+          
     }
 }
