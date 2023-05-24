@@ -23,7 +23,7 @@
   "extra": {
     "laravel": {
       "providers": [
-        "Bnjunge\\FormatKenyanPhoneNumbers\\FormatKenyanPhoneNumbersServiceProvider"
+        "Bnjunge\\FormatKenyanPhoneNumbers\\KEPhonesServiceProvider"
       ]
     }
   }
