@@ -5,14 +5,14 @@ namespace Bnjunge\FormatKenyanPhoneNumbers;
 class Format
 {
     /**
-         *
-         * Format phone numbers
-         * @param int :phone number
-         * @return int : formated phone number
-         * @return string : invalid error
-         * @access public
-         */
-    public function formatted_phone_number($num)
+     *
+     * Format phone numbers
+     * @param int :phone number
+     * @return int : formated phone number
+     * @return string : invalid error
+     * @access public
+     */
+    public function phone($num)
     {
         $num = preg_replace('/[^0-9]/', '', $num);
         if (strlen($num) <= 12) {
@@ -35,8 +35,7 @@ class Format
      * @version 1.0.0
      * @author Benson Njunge <survtechke@gmail.com>
      */
-
-    private function identifiers_imsi()
+    private function imsi()
     {
         $countryCareers = array(
             'kenya' => array(
@@ -170,18 +169,17 @@ class Format
     }
 
     /**
-     * Get Country ISPs
+     * Get ISPs from phone number
      * @param int :phone number
      * @return string ISP
      * @access public
      */
-
-    public function check_operator($phone)
+    public function operator($phone)
     {
         $prefix = substr($phone, 0, 6);
 
         // load providers
-        $carrier = $this->identifiers_imsi();
+        $carrier = $this->imsi();
         $cc = json_decode(json_encode($carrier));
         // Providers
         $Safaricom = $cc->kenya->carriers->Safaricom;
