@@ -13,6 +13,15 @@ class FormatTest extends TestCase
     {
         $phone = Format::phone('0712 34.56-78');
         $this->assertTrue($phone == '254712345678');
+
+        $phone2 = Format::phone('07-12 123-123');
+        $this->assertTrue($phone2 == '254712123123');
+
+        $phone3 = Format::phone('07(12) 123.123');
+        $this->assertTrue($phone3 == '254712123123');
+
+        $phone4 = Format::phone('07(12) 123 123');
+        $this->assertTrue($phone4 == '254712123123');
     }
 
     /**
