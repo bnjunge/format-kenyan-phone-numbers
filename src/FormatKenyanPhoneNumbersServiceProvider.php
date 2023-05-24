@@ -1,6 +1,6 @@
 <?php
 
-namespace BNjunge\FormatKenyanPhoneNumbers;
+namespace Bnjunge\FormatKenyanPhoneNumbers;
 
 use Illuminate\Support\ServiceProvider;
 
