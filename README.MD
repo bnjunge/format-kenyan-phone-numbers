@@ -48,6 +48,11 @@ Operators include:
 - Telkom
 - JTL
 
+Unverified IPS/MVNOs
+- Sasa Mobile
+- Homeland Mobile
+- Eferio
+
 ### Contribution
 This is a work in progress and contributions are highly welcome. You can submit a PR anytime and once we review we might merge or advice.
 
