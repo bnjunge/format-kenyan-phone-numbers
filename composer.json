@@ -1,7 +1,7 @@
 {
   "name": "bnjunge/format-kenyan-phone-numbers",
   "description": "Format numbers",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "type": "library",
   "require-dev": {
     "phpunit/phpunit": "^9.6"
