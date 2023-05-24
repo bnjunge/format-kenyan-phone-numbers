@@ -1,6 +1,11 @@
 # Phone Number Formatter
 This is a simple php class that formats Kenyan phone Numbers and identifies which carrier the number is on.
 
+## Installation
+```curl
+composer require bnjunge/format-kenyan-phone-numbers
+```
+
 ## Usage
 Instantiate the class or extend on your methods
 #### Instantiating
