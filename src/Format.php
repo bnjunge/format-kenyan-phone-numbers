@@ -15,11 +15,19 @@ class Format
     public static function phone($num)
     {
         $num = preg_replace('/[^0-9]/', '', $num);
-        if (strlen($num) <= 12) {
+
+        // valid checker, check string
+        $_validchecker = substr($num, 2);
+        
+        if(strlen($_validchecker) <= 7){
+            return 'Invalid Phone Number ' . $num;
+        }
+
+        if (strlen($num) <= 12 and strlen($num) >= 9) {
             $c = substr($num, 0, 1);
             if (substr($num, 0, 3) == '254' and strlen($num) == 12) {
                 return $phone = $num;
-            } elseif ((strlen($num) == 10 || strlen($num) == 9) and ($c == 0 or $c == 7)) {
+            } elseif ((strlen($num) == 10 || strlen($num) == 9) and ($c == 0 or $c == 7 or $c == 1)) {
                 $phone = substr($num, -9);
                 $phone = '254' . $phone;
                 return $phone;
@@ -158,7 +166,7 @@ class Format
                     'Sema_Mobile' => array(
                         '254767'
                     ),
-                    'Homelands media' => array(
+                    'Homelands_media' => array(
                         '254744'
                     )
                 )
@@ -176,6 +184,7 @@ class Format
      */
     public static function operator($phone)
     {
+        $phone = self::phone($phone);
         $prefix = substr($phone, 0, 6);
 
         // load providers
