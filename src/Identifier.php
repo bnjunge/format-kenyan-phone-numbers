@@ -1,20 +1,20 @@
 <?php
-namespace App\Bl\General;
 
-class Identifier{
-/**
-     *
-     * Format phone numbers
-     * @param int :phone number
-     * @return int : formated phone number
-     * @return string : invalid error
-     * @access public
-     */
+namespace Bnjunge\FormatKenyanPhoneNumbers;
 
-
+class Identifier
+{
+    /**
+         *
+         * Format phone numbers
+         * @param int :phone number
+         * @return int : formated phone number
+         * @return string : invalid error
+         * @access public
+         */
     public function formatted_phone_number($num)
     {
-       $num = str_replace(array(" ", ",", ".", "!", "+", "-", "@", "#", "$", "%", "^", "&", "*", "(", ")", "_"), "", $num);
+        $num = preg_replace('/[^0-9]/', '', $num);
         if (strlen($num) <= 12) {
             $c = substr($num, 0, 1);
             if (substr($num, 0, 3) == '254' and strlen($num) == 12) {
@@ -204,25 +204,25 @@ class Identifier{
             'Homelands_media' => $Homelands_media,
           ];
 
-          /**
-           * could possibly use an array intersect instead of a foreach loop but not tested
-           * 
-           * 
-           * $result = array_intersect($operators, [$prefix]);
-           * 
-           * if (!empty($result)) {
-           * return key($result);
-           * }
-          */
+        /**
+         * could possibly use an array intersect instead of a foreach loop but not tested
+         *
+         *
+         * $result = array_intersect($operators, [$prefix]);
+         *
+         * if (!empty($result)) {
+         * return key($result);
+         * }
+        */
 
-          
-          foreach ($operators as $key => $value) {
+
+        foreach ($operators as $key => $value) {
             if (in_array($prefix, $value)) {
-              return $key;
+                return $key;
             }
-          }
-          
-          return 'Invalid Operator';
-          
+        }
+
+        return 'Invalid Operator';
+
     }
 }
