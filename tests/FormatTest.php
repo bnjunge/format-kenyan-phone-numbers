@@ -26,6 +26,25 @@ class FormatTest extends TestCase
 
     /**
      * @test
+     * @covers Format: A valid phone number is returned as is
+     */
+    public function testValidPhone()
+    {
+        // safaricom
+        $phone = Format::phone('254712345678');
+        $this->assertTrue($phone == '254712345678');
+
+        // airtel
+        $phone2 = Format::phone('254732345678');
+        $this->assertTrue($phone2 == '254732345678');
+
+        // telkom
+        $phone3 = Format::phone('254772345678');
+        $this->assertTrue($phone3 == '254772345678');
+    }
+
+    /**
+     * @test
      * @covers Format: Return an invalid phone number error, number with more than 12 digits
      */
     public function testInvalidPhone()
