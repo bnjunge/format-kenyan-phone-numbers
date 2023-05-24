@@ -90,4 +90,14 @@ class FormatTest extends TestCase
         $operator = Format::operator('0747 34.56-78');
         $this->assertTrue($operator == 'faiba4g');
     }
+
+    /**
+     * @test
+     * @covers Format: Check ISP: Operator is Invalid Operator
+     */
+    public function testIspIsInvalidOperator()
+    {
+        $operator = Format::operator('0116 34.56-78');
+        $this->assertTrue($operator == 'Invalid Operator');
+    }
 }
