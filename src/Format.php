@@ -1,8 +1,10 @@
 <?php
-namespace App\Bl\General;
 
-class Identifier{
-/**
+namespace Bnjunge\FormatKenyanPhoneNumbers;
+
+class Format
+{
+    /**
      *
      * Format phone numbers
      * @param int :phone number
@@ -10,16 +12,22 @@ class Identifier{
      * @return string : invalid error
      * @access public
      */
-
-
-    public function formatted_phone_number($num)
+    public static function phone($num)
     {
-       $num = str_replace(array(" ", ",", ".", "!", "+", "-", "@", "#", "$", "%", "^", "&", "*", "(", ")", "_"), "", $num);
-        if (strlen($num) <= 12) {
+        $num = preg_replace('/[^0-9]/', '', $num);
+
+        // valid checker, check string
+        $_validchecker = substr($num, 2);
+        
+        if(strlen($_validchecker) <= 7){
+            return 'Invalid Phone Number ' . $num;
+        }
+
+        if (strlen($num) <= 12 and strlen($num) >= 9) {
             $c = substr($num, 0, 1);
             if (substr($num, 0, 3) == '254' and strlen($num) == 12) {
                 return $phone = $num;
-            } elseif ((strlen($num) == 10 || strlen($num) == 9) and ($c == 0 or $c == 7)) {
+            } elseif ((strlen($num) == 10 || strlen($num) == 9) and ($c == 0 or $c == 7 or $c == 1)) {
                 $phone = substr($num, -9);
                 $phone = '254' . $phone;
                 return $phone;
@@ -35,8 +43,7 @@ class Identifier{
      * @version 1.0.0
      * @author Benson Njunge <survtechke@gmail.com>
      */
-
-    private function identifiers_imsi()
+    private static function imsi()
     {
         $countryCareers = array(
             'kenya' => array(
@@ -159,7 +166,7 @@ class Identifier{
                     'Sema_Mobile' => array(
                         '254767'
                     ),
-                    'Homelands media' => array(
+                    'Homelands_media' => array(
                         '254744'
                     )
                 )
@@ -170,18 +177,18 @@ class Identifier{
     }
 
     /**
-     * Get Country ISPs
+     * Get ISPs from phone number
      * @param int :phone number
      * @return string ISP
      * @access public
      */
-
-    public function check_operator($phone)
+    public static function operator($phone)
     {
+        $phone = self::phone($phone);
         $prefix = substr($phone, 0, 6);
 
         // load providers
-        $carrier = $this->identifiers_imsi();
+        $carrier = self::imsi();
         $cc = json_decode(json_encode($carrier));
         // Providers
         $Safaricom = $cc->kenya->carriers->Safaricom;
@@ -204,25 +211,25 @@ class Identifier{
             'Homelands_media' => $Homelands_media,
           ];
 
-          /**
-           * could possibly use an array intersect instead of a foreach loop but not tested
-           * 
-           * 
-           * $result = array_intersect($operators, [$prefix]);
-           * 
-           * if (!empty($result)) {
-           * return key($result);
-           * }
-          */
+        /**
+         * could possibly use an array intersect instead of a foreach loop but not tested
+         *
+         *
+         * $result = array_intersect($operators, [$prefix]);
+         *
+         * if (!empty($result)) {
+         * return key($result);
+         * }
+        */
 
-          
-          foreach ($operators as $key => $value) {
+
+        foreach ($operators as $key => $value) {
             if (in_array($prefix, $value)) {
-              return $key;
+                return $key;
             }
-          }
-          
-          return 'Invalid Operator';
-          
+        }
+
+        return 'Invalid Operator';
+
     }
 }
