@@ -12,7 +12,7 @@ class Format
      * @return string : invalid error
      * @access public
      */
-    public function phone($num)
+    public static function phone($num)
     {
         $num = preg_replace('/[^0-9]/', '', $num);
         if (strlen($num) <= 12) {
@@ -35,7 +35,7 @@ class Format
      * @version 1.0.0
      * @author Benson Njunge <survtechke@gmail.com>
      */
-    private function imsi()
+    private static function imsi()
     {
         $countryCareers = array(
             'kenya' => array(
@@ -174,12 +174,12 @@ class Format
      * @return string ISP
      * @access public
      */
-    public function operator($phone)
+    public static function operator($phone)
     {
         $prefix = substr($phone, 0, 6);
 
         // load providers
-        $carrier = $this->imsi();
+        $carrier = self::imsi();
         $cc = json_decode(json_encode($carrier));
         // Providers
         $Safaricom = $cc->kenya->carriers->Safaricom;
