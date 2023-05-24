@@ -9,7 +9,8 @@ composer require bnjunge/format-kenyan-phone-numbers
 ## Usage
 Instantiate the class or extend on your methods
 #### Instantiating
- ```<?php
+ ```php
+ <?php
         use Bnjunge\FormatKenyanPhoneNumbers\Format;
 
 
@@ -22,6 +23,7 @@ Instantiate the class or extend on your methods
         # Check ISP
         $isp = Format::operator($formatted_number);
         echo $isp;
+
 ```
 
 #### Format Phone Numbers
