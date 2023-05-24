@@ -2,7 +2,7 @@
 
 namespace Bnjunge\FormatKenyanPhoneNumbers;
 
-class Identifier
+class Format
 {
     /**
          *
