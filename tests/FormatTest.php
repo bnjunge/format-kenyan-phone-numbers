@@ -43,6 +43,9 @@ class FormatTest extends TestCase
     {
         $operator = Format::operator('0712 34.56-78');
         $this->assertTrue($operator == 'safaricom');
+        
+        $operator = Format::operator('0722 34.56-78');
+        $this->assertTrue($operator == 'safaricom');
     }
     
     /**
@@ -52,6 +55,9 @@ class FormatTest extends TestCase
     public function testIspIsAirtel()
     {
         $operator = Format::operator('0732 34.56-78');
+        $this->assertTrue($operator == 'airtel');
+
+        $operator = Format::operator('0733 34.56-78');
         $this->assertTrue($operator == 'airtel');
     }
 
